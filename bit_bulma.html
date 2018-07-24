@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <link rel="stylesheet" href="bulma.min.css">
+    <script
+        src="https://code.jquery.com/jquery-3.3.1.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
+    <meta charset="utf-8">
+    <title>BTC <--> INR</title>
+  </head>
+  <body>
+    <div class="columns">
+      <div class="column">
+      </div>
+      <div class="column second">
+        <div class="tile is-parent">
+          <article class="tile is-child notification is-primary">
+            <p class="title has-text-centered">BTC <----> INR</p>
+          </article>
+        </div>
+      </div>
+      <div class="column">
+      </div>
+    </div>
+    <div class="columns">
+      <div class="column">
+        <label class="title is-centerd level-item has-text-centered">BTC:</label><input
+        class="input is-primary is-large"id="btc"
+        onkeyup="toinr()" type="text" name="" value="0"><br>
+      </div>
+      <div class="column has-text-centered title is-centerd level-item"></div>
+      <div class="column">
+          <label class="title is-centerd level-item  has-text-centered">INR:</label><input
+          class="input is-primary is-large" id="inr"
+          onkeyup="tobtc()" type="text" name="" value="0">
+      </div>
+      </div>
+    <script type="text/javascript">
+      var a;
+      var b;
+      var c;
+      $.ajax({url:"https://min-api.cryptocompare.com/data/price?fsym=BTC&tsyms=INR",
+              method:"get",
+              success:function(result){
+                      b=result.INR;
+                    },
+                  });
+              function tobtc(){
+                a=$("#inr").val();
+                c = a/b;
+                $("#btc").val(c);
+              }
+              function toinr() {
+                a = $("#btc").val();
+                c = a*b;
+                $("#inr").val(c);
+              }
+    </script>
+  </body>
+</html>
